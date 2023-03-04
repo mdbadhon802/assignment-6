@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/68152c3809.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/68152c3809.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 
@@ -18,38 +19,43 @@
     <main>
         <section>
             <div id="card-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:mx-36">
-                
+
             </div>
         </section>
         <section>
             <div onclick="" id="modal-container">
                 <input type="checkbox" id="my-modal-5" class="modal-toggle" />
                 <div class="modal">
-                    <div class="modal-box  max-w-full h-screen ">
-                    <div class="flex">
-                        <div class="bg-slate-900 text-white">
-                            <p id="pragraph"></p>
-                            <div id="pricing" class="flex gap-10">
-                                <!-- <h1></h1> -->
+                    <div class="modal-box  max-w-full h-screen  ">
+                        <div class="flex mx-48 mt-20 ">
+                            <div class=" text-black bg-red-100 border-red-400 border-2  py-10 px-10 rounded w-10/12 ">
+                                <p id="pragraph" class="mb-5 font-semibold"></p>
+
+                                <div id="pricing" class="flex gap-10 mb-5 ">
+
+                                </div>
+                                <div class="flex gap-10">
+
+                                    <div>
+                                        <h1 class="text-xl font-bold">Features</h1>
+                                        <div id="featursContainer">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <h1 class="text-xl font-bold">Integrations</h1>
+                                        <div id="IntegrationsContainer">
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex gap-10">
-                                
-                                <div id="featursContainer">
-                                    
-                                </div>
-                                
-                                <div id="IntegrationsContainer">
-                                    
-                                </div>
+                            <div id="modalImageContainer" class=" px-10 py-10 rounded w-10/12 border-black border-2 ml-10 bg-neutral-50 shadow-indigo-500/50">
                             </div>
                         </div>
-                        <div id="modalImageContainer" class="ml-11">
-                           
-                        
-                        </div>
-                    </div>
                         <div class="modal-action">
-                            <label for="my-modal-5" class="btn">X</label>
+                            <label for="my-modal-5" class="btn rounded-full absolute top-28 bg-white text-black hover:text-white"><i class="fa-solid fa-xmark"></i></label>
                         </div>
                     </div>
                 </div>
@@ -57,13 +63,14 @@
         </section>
 
         <section>
-                <div class="text-center">
-                    <button id="selicing-BTN" class="btn invisible">See More</button>
+            <div id="selicing-BTN" class="text-center invisible">
+                    <button  class=" btn ">See More</button>
                 </div>
         </section>
     </main>
-    <script src="app.js"></script>
-    
+    <script src=" app.js">
+    </script>
+
 </body>
 
 </html>

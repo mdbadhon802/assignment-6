@@ -6,32 +6,13 @@ const loadAllData = ()=> {
       
 }
 
-// API টা fetch করছেন ঐখানে একটা প্যারামিটার নেন। এরপর fetch করা ডাটা পাস করার সময় ২টা প্যারামিটার পাস করবেন।
-// পরবর্তী ফাংশনে ২টা আলাদা প্যারামিটার আকারে এগুলো রিসিভ করবেন। এরপর if কন্ডিশন দিবেন এভাবে if( technologies.length>6 && limit) {
-// এরপর fetch করছেন ঐ ফাংশনটা ২ জায়গা থেকে কল দিবেন।
-// প্যারামিটারসহ গ্লোবালি এবং প্যারামিটার ছাড়া Show All Button এর ভেতর থেকে।
-
 
 const showDataOnUi = (data) => {
+
     const cardContainer = document.getElementById('card-container');
-
-    console.log(data.tools.length)
-
-    const slicingBtn = document.getElementById('selicing-BTN');
-
-    if (data.tools.length > 6){
-        sliceing = data.tools.slice(0,6)
-        slicingBtn.classList.remove('invisible')
-
-    }
-    else{
-        slicingBtn.classList.add('invisible')
-    }
-
     
-
     data.tools.forEach(DataElement => {
-        // console.log(DataElement)
+        console.log(DataElement.features)
         const div = document.createElement('div');
         div.classList.add('insideCard');
         div.innerHTML = `
@@ -46,16 +27,28 @@ const showDataOnUi = (data) => {
             <h2 class="card-title">${DataElement.name}</h2>
             <p><i class="fa-solid fa-calendar-days"></i> ${DataElement.published_in}</p>
         </div>
-        <label onclick="loadSingleDataDetails('${DataElement.id}')" for="my-modal-5" class="btn">open modal</label>
+        <label onclick="loadSingleDataDetails('${DataElement.id}')" for="my-modal-5" class="btn rounded-full bg-red-100 border-0 text-red-400"><i class="fa-solid fa-arrow-right"></i></label>
         
         `
         cardContainer.appendChild(div);
     });
 
-    
-    
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const loadSingleDataDetails = id => {
@@ -67,7 +60,7 @@ const loadSingleDataDetails = id => {
 const showDataOnModal = (modalData) => {
     
     const  modalPragraph = document.getElementById('pragraph');
-    modalPragraph.textContent = modalData.description;
+    modalPragraph.textContent = modalData.description.slice(10);
 
     const pricingContainer = document.getElementById('pricing');
     pricingContainer.innerText = ''
@@ -75,9 +68,9 @@ const showDataOnModal = (modalData) => {
         const div = document.createElement('div');
         div.innerHTML = `
         
-        <h1>${element[1].price}</h1>
+        <h1 class="text-green-500 bg-white px-4 py-5 text-center rounded font-bold">${element[1].price}</h1>
         
-        <h1>${element[1].plan}</h1>
+        <h1 class="text-orange-500 bg-white px-4 py-5 text-center rounded font-bold">${element[1].plan}</h1>
         `
         pricingContainer.appendChild(div);
         // console.log(element)
@@ -90,7 +83,7 @@ const showDataOnModal = (modalData) => {
 
         const ol = document.createElement('ol');
         ol.innerHTML = `
-            <h1>Features</h1>
+            
             <li>${element[1].feature_name}</li>
         `
         featursContainer.appendChild(ol)
@@ -103,7 +96,7 @@ const showDataOnModal = (modalData) => {
     modalData.integrations.forEach(element => {
         const ol = document.createElement('ol');
         ol.innerHTML = `
-            <h1>Integrations</h1>
+            
             <li>${element}</li>
         `
         IntegrationsContainer.appendChild(ol);
@@ -116,9 +109,9 @@ const showDataOnModal = (modalData) => {
         const div = document.createElement('div');
         div.classList.add('modal-img')
         div.innerHTML = `
-            <img class="w-6/12 h-2/3" src="${modalData.image_link[0]}" alt="">
-            <h1>${modalData.input_output_examples[0].input}</h1>
-            <p>${modalData.input_output_examples[0].output}</p>
+            <img class="w-10/12/12 h-2/3 rounded" src="${modalData.image_link[0]}" alt="">
+            <h1 class="text-2xl text-center font-bold	">${modalData.input_output_examples[0].input}</h1>
+            <p class="text-center">${modalData.input_output_examples[0].output}</p>
         `
         modalImageContainer.appendChild(div);
     
