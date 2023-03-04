@@ -1,15 +1,34 @@
-const loadAllData = () => {
+const loadAllData = ()=> {
     const url = `https://openapi.programming-hero.com/api/ai/tools`
     fetch(url)
         .then(response => response.json())
         .then(responseData => showDataOnUi(responseData.data))
-       
+      
 }
 
+// API টা fetch করছেন ঐখানে একটা প্যারামিটার নেন। এরপর fetch করা ডাটা পাস করার সময় ২টা প্যারামিটার পাস করবেন।
+// পরবর্তী ফাংশনে ২টা আলাদা প্যারামিটার আকারে এগুলো রিসিভ করবেন। এরপর if কন্ডিশন দিবেন এভাবে if( technologies.length>6 && limit) {
+// এরপর fetch করছেন ঐ ফাংশনটা ২ জায়গা থেকে কল দিবেন।
+// প্যারামিটারসহ গ্লোবালি এবং প্যারামিটার ছাড়া Show All Button এর ভেতর থেকে।
 
 
 const showDataOnUi = (data) => {
     const cardContainer = document.getElementById('card-container');
+
+    console.log(data.tools.length)
+
+    const slicingBtn = document.getElementById('selicing-BTN');
+
+    if (data.tools.length > 6){
+        sliceing = data.tools.slice(0,6)
+        slicingBtn.classList.remove('invisible')
+
+    }
+    else{
+        slicingBtn.classList.add('invisible')
+    }
+
+    
 
     data.tools.forEach(DataElement => {
         // console.log(DataElement)
@@ -33,11 +52,11 @@ const showDataOnUi = (data) => {
         cardContainer.appendChild(div);
     });
 
+    
+    
+
 }
 
-
-
-loadAllData()
 
 const loadSingleDataDetails = id => {
     fetch (`https://openapi.programming-hero.com/api/ai/tool/${id}`)
@@ -55,7 +74,9 @@ const showDataOnModal = (modalData) => {
     Object.entries(modalData.pricing).map(element => {
         const div = document.createElement('div');
         div.innerHTML = `
+        
         <h1>${element[1].price}</h1>
+        
         <h1>${element[1].plan}</h1>
         `
         pricingContainer.appendChild(div);
@@ -69,6 +90,7 @@ const showDataOnModal = (modalData) => {
 
         const ol = document.createElement('ol');
         ol.innerHTML = `
+            <h1>Features</h1>
             <li>${element[1].feature_name}</li>
         `
         featursContainer.appendChild(ol)
@@ -81,6 +103,7 @@ const showDataOnModal = (modalData) => {
     modalData.integrations.forEach(element => {
         const ol = document.createElement('ol');
         ol.innerHTML = `
+            <h1>Integrations</h1>
             <li>${element}</li>
         `
         IntegrationsContainer.appendChild(ol);
@@ -88,17 +111,27 @@ const showDataOnModal = (modalData) => {
 
     const modalImageContainer = document.getElementById('modalImageContainer');
     modalImageContainer.innerHTML = ''
-    console.log(modalData.image_link[0])
+    // console.log(modalData.image_link[0])
         
         const div = document.createElement('div');
+        div.classList.add('modal-img')
         div.innerHTML = `
-            <img src="${modalData.image_link[0]}" alt="">
+            <img class="w-6/12 h-2/3" src="${modalData.image_link[0]}" alt="">
+            <h1>${modalData.input_output_examples[0].input}</h1>
+            <p>${modalData.input_output_examples[0].output}</p>
         `
         modalImageContainer.appendChild(div);
     
+    
+    console.log(modalData.input_output_examples[0].input       )
 
+    
 }
 
 
 
-    
+loadAllData()
+
+
+
+
