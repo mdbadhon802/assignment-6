@@ -2,17 +2,16 @@ const loadAllData = ()=> {
     const url = `https://openapi.programming-hero.com/api/ai/tools`
     fetch(url)
         .then(response => response.json())
-        .then(responseData => showDataOnUi(responseData.data))
+        .then(responseData => showDataOnUi(responseData.data.tools.slice(0,12)))
       
 }
 
 
 const showDataOnUi = (data) => {
-
     const cardContainer = document.getElementById('card-container');
     
-    data.tools.forEach(DataElement => {
-        console.log(DataElement.features)
+    data.forEach(DataElement => {
+        // console.log(DataElement.features)
         const div = document.createElement('div');
         div.classList.add('insideCard');
         div.innerHTML = `
@@ -34,21 +33,6 @@ const showDataOnUi = (data) => {
     });
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const loadSingleDataDetails = id => {
@@ -112,19 +96,16 @@ const showDataOnModal = (modalData) => {
             <img class="w-10/12/12 h-2/3 rounded" src="${modalData.image_link[0]}" alt="">
             <h1 class="text-2xl text-center font-bold	">${modalData.input_output_examples[0].input}</h1>
             <p class="text-center">${modalData.input_output_examples[0].output}</p>
+            <p class="bg-red-500 text-white w-32 pl-3 pr-3 rounded-full relative left-96 bottom-96">${modalData.accuracy.score ? modalData.accuracy.score :'0'}%accuracy </p>
+
         `
         modalImageContainer.appendChild(div);
-    
-    
-    console.log(modalData.input_output_examples[0].input       )
-
-    
+     
+    console.log(modalData.accuracy)
 }
 
 
 
 loadAllData()
-
-
 
 
